@@ -102,5 +102,15 @@ class PopularViewController: UIViewController, UICollectionViewDataSource {
         }
         task.resume()
     }
-
+    
+    // Respond to user clicks on cells
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UICollectionViewCell
+        if let indexPath = collectionView.indexPath(for: cell) {
+            let movie = movies[indexPath.row]
+            let detailViewController = segue.destination as! DetailsViewController
+            detailViewController.movie = movie
+        }
+    }
+    
 }
