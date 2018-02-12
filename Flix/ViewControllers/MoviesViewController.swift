@@ -117,7 +117,11 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UISearchBar
         
         cell.titleLabel.text = (movie["title"] as! String)
         cell.overviewLabel.text = (movie["overview"] as! String)
-        cell.posterImageView.af_setImage(withURL: posterURL)
+        
+        // Place holder image
+        let placeholderImg = UIImage(named: "placeholder.png")
+        
+        cell.posterImageView.af_setImage(withURL: posterURL, placeholderImage: placeholderImg)
         
         return cell
     }
@@ -152,6 +156,16 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UISearchBar
         filteredMovies = movies
         noResultsLabel.isHidden = true
         self.tableView.reloadData()
+    }
+    
+    // Respond to user clicks on cells
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        if let indexPath = tableView.indexPath(for: cell) {
+            let movie = movies[indexPath.row]
+            let detailViewController = segue.destination as! DetailsViewController
+            detailViewController.movie = movie
+        }
     }
     
     override func didReceiveMemoryWarning() {
