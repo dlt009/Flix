@@ -13,6 +13,7 @@
 		630105F020317855004A746B /* PosterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630105EF20317855004A746B /* PosterCell.swift */; };
 		630105F2203178A9004A746B /* SuperheroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630105F1203178A9004A746B /* SuperheroViewController.swift */; };
 		632B737C2027C2A2008FE116 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632B737B2027C2A2008FE116 /* MovieCell.swift */; };
+		636EADB520318FB900C30B0C /* PopularViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636EADB420318FB900C30B0C /* PopularViewController.swift */; };
 		63828BCD20279D6500554B35 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63828BCC20279D6500554B35 /* MoviesViewController.swift */; };
 		639843692026C145007B5E17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639843682026C145007B5E17 /* AppDelegate.swift */; };
 		6398436E2026C145007B5E17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6398436C2026C145007B5E17 /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 		630105EF20317855004A746B /* PosterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCell.swift; sourceTree = "<group>"; };
 		630105F1203178A9004A746B /* SuperheroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperheroViewController.swift; sourceTree = "<group>"; };
 		632B737B2027C2A2008FE116 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		636EADB420318FB900C30B0C /* PopularViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularViewController.swift; sourceTree = "<group>"; };
 		63828BCC20279D6500554B35 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		639843652026C145007B5E17 /* Flix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		639843682026C145007B5E17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				63828BCC20279D6500554B35 /* MoviesViewController.swift */,
 				630105ED20314009004A746B /* DetailsViewController.swift */,
 				630105F1203178A9004A746B /* SuperheroViewController.swift */,
+				636EADB420318FB900C30B0C /* PopularViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				630105F020317855004A746B /* PosterCell.swift in Sources */,
 				630105F2203178A9004A746B /* SuperheroViewController.swift in Sources */,
 				63828BCD20279D6500554B35 /* MoviesViewController.swift in Sources */,
+				636EADB520318FB900C30B0C /* PopularViewController.swift in Sources */,
 				632B737C2027C2A2008FE116 /* MovieCell.swift in Sources */,
 				630105EE20314009004A746B /* DetailsViewController.swift in Sources */,
 			);
