@@ -22,7 +22,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         
         // Determine poster imageView layout for collection view
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.minimumInteritemSpacing = 5
+        layout.minimumInteritemSpacing = 2
         layout.minimumLineSpacing = layout.minimumInteritemSpacing
         
         let cellsPerLine: CGFloat = 2
