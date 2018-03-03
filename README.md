@@ -1,4 +1,4 @@
-# Lab 5 - *Flix*
+# Project 5 - *Flix*
 
 **Flix** is a movies app displaying box office and top rental DVDs using [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
