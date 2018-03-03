@@ -11,8 +11,11 @@ import AlamofireImage
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate{
 
-    var movies: [[String: Any]] = []
-    var filteredMovies: [[String: Any]] = []
+    //var movies: [[String: Any]] = []
+    var movies: [Movie] = []
+    
+    //var filteredMovies: [[String: Any]] = []
+    var filteredMovies: [Movie] = []
     
     var refreshControl: UIRefreshControl!
     
@@ -64,7 +67,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UISearchBar
         
         
         // Network handling
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
+        /*let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in
@@ -81,10 +84,15 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UISearchBar
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                 
                 // Get the array of movies
-                let movies = dataDictionary["results"] as! [[String:Any]]
+                let moviesDict = dataDictionary["results"] as! [[String:Any]]
                 
                 // Store the movies in a property to use elsewhere
-                self.movies = movies
+                //self.movies = movies
+                self.movies = []
+                for dictionary in moviesDict {
+                    let movie = Movie(dictionary: dictionary)
+                    self.movies.append(movie)
+                }
                 
                 self.filteredMovies = self.movies
                 
@@ -95,7 +103,16 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UISearchBar
                 self.refreshControl.endRefreshing()
             }
         }
-        task.resume()
+        task.resume()*/
+        MovieApiManager().nowPlayingMovies { (movies: [Movie]?, error: Error?) in
+            if let movies = movies {
+                self.movies = movies
+                self.filteredMovies = self.movies
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        }
+        
     }
     
     // Number of cells in table
@@ -109,9 +126,10 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UISearchBar
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
         
         //let movie = movies[indexPath.row]
-        let movie = filteredMovies[indexPath.row]
+        /*let movie = filteredMovies[indexPath.row]
         
         let posterPathString = movie["poster_path"] as! String
+        
         let baseURLString = "https://image.tmdb.org/t/p/w500"
         let posterURL = URL(string: baseURLString + posterPathString)!
         
@@ -122,6 +140,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UISearchBar
         let placeholderImg = UIImage(named: "placeholder.png")
         
         cell.posterImageView.af_setImage(withURL: posterURL, placeholderImage: placeholderImg)
+        */
+        
+        cell.movie = filteredMovies[indexPath.row]
         
         return cell
     }
@@ -129,9 +150,14 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UISearchBar
     // Update based on the text in the Search Bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
     {
-        filteredMovies = searchText.isEmpty ? movies : movies.filter{(movie: [String:Any]) -> Bool in
+        /*filteredMovies = searchText.isEmpty ? movies : movies.filter{(movie: [String:Any]) -> Bool in
             return (movie["title"] as! String).range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-        }
+        }*/
+        
+        filteredMovies = searchText.isEmpty ? movies : movies.filter{(movie: Movie) -> Bool in
+            return (movie.title ).range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+         }
+        
         if (filteredMovies.count == 0) {
             noResultsLabel.isHidden = false
         }
@@ -162,7 +188,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UISearchBar
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UITableViewCell
         if let indexPath = tableView.indexPath(for: cell) {
-            let movie = movies[indexPath.row]
+            let movie = filteredMovies[indexPath.row]
             let detailViewController = segue.destination as! DetailsViewController
             detailViewController.movie = movie
         }

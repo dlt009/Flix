@@ -24,14 +24,15 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
     
-    var movie: [ String: Any ]!
+    //var movie: [ String: Any ]!
+    var movie: Movie?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         if let movie = movie {
-            titleLabel.text = movie[MovieKeys.title] as? String
+            /*titleLabel.text = movie[MovieKeys.title] as? String
             releaseDateLabel.text = movie[MovieKeys.releaseDate] as? String
             overviewLabel.text = movie[MovieKeys.overview] as? String
             let backDropPathString = movie[MovieKeys.backDropPath] as! String
@@ -42,7 +43,16 @@ class DetailsViewController: UIViewController {
             backDropImageView.af_setImage(withURL: backDropURL)
             
             let posterURL = URL(string: baseURLString + posterPathString)!
-            posterImageView.af_setImage(withURL: posterURL)
+            posterImageView.af_setImage(withURL: posterURL)*/
+            titleLabel.text = movie.title
+            releaseDateLabel.text = movie.releaseDate
+            overviewLabel.text = movie.overview
+            
+            let posterUrl = movie.posterUrl
+            posterImageView.af_setImage(withURL: posterUrl!)
+            
+            let backdropUrl = movie.backdropUrl
+            backDropImageView.af_setImage(withURL: backdropUrl!)
         }
     }
 
